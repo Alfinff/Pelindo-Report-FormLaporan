@@ -26,7 +26,7 @@ class FormIsian extends Model
     protected $table      = 'ms_form_isian';
     protected $guarded    = [];
 
-    public function jenisForm()
+    public function jenis_form()
     {
         return $this->hasOne(FormJenis::class, 'kode', 'form_jenis');
     }

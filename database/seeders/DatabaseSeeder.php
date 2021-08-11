@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('AllTableSeeder');
+        $this->call([
+            FormJenisSeeder::class,
+            FormIsianKategoriSeeder::class,
+            FormIsianSeeder::class,
+        ]);
     }
 }

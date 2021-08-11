@@ -19,7 +19,7 @@ class FormController extends Controller
     public function index(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
+            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
 
             if (!$form) {
                 return response()->json([
@@ -43,7 +43,7 @@ class FormController extends Controller
     public function formCCTV(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -53,30 +53,24 @@ class FormController extends Controller
                 ]);
             }
 
-            // $form = $form->map(function ($dataForm) {
-            //     $form = [];
-            //     $form['uuid'] = $dataForm->uuid;
-            //     $form['judul'] = $dataForm->judul;
-            //     $form['status'] = $dataForm->status;
-            //     $form['created_at'] = $dataForm->created_at;
-            //     $form['updated_at'] = $dataForm->updated_at;
-            //     $form['kategori'] = '';
-            //     if($dataForm->kategori_isian) {
-            //         $form['kategori'] = [
-            //             'uuid' => $dataForm->kategori_isian->uuid ?? '',
-            //             'nama' => str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '',
-            //         ];
-            //     }
-            //     $form['jenis'] = '';
-            //     if($dataForm->form_jenis) {
-            //         $form['jenis'] = [
-            //             'uuid' => $dataForm->jenisForm->uuid  ?? '',
-            //             'nama' => $dataForm->jenisForm->nama  ?? '',
-            //         ];
-            //     }
+            $form = $form->map(function ($dataForm) {
+                $form = [];
+                $form['uuid'] = $dataForm->uuid;
+                $form['judul'] = $dataForm->judul;
+                $form['status'] = $dataForm->status;
+                $form['created_at'] = $dataForm->created_at;
+                $form['updated_at'] = $dataForm->updated_at;
+                $form['kategori'] = '';
+                if($dataForm->kategori_isian) {
+                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                }
+                $form['jenis'] = '';
+                if($dataForm->jenis_form) {
+                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                }
 
-            //     return $form;
-            // });
+                return $form;
+            });
 
             return response()->json([
                 'success' => true,
@@ -92,7 +86,7 @@ class FormController extends Controller
     public function formCLEANING(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -101,6 +95,25 @@ class FormController extends Controller
                     'code'    => 404,
                 ]);
             }
+
+            $form = $form->map(function ($dataForm) {
+                $form = [];
+                $form['uuid'] = $dataForm->uuid;
+                $form['judul'] = $dataForm->judul;
+                $form['status'] = $dataForm->status;
+                $form['created_at'] = $dataForm->created_at;
+                $form['updated_at'] = $dataForm->updated_at;
+                $form['kategori'] = '';
+                if($dataForm->kategori_isian) {
+                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                }
+                $form['jenis'] = '';
+                if($dataForm->jenis_form) {
+                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                }
+
+                return $form;
+            });
 
             return response()->json([
                 'success' => true,
@@ -116,7 +129,7 @@ class FormController extends Controller
     public function formFACILITIES(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -125,6 +138,25 @@ class FormController extends Controller
                     'code'    => 404,
                 ]);
             }
+
+            $form = $form->map(function ($dataForm) {
+                $form = [];
+                $form['uuid'] = $dataForm->uuid;
+                $form['judul'] = $dataForm->judul;
+                $form['status'] = $dataForm->status;
+                $form['created_at'] = $dataForm->created_at;
+                $form['updated_at'] = $dataForm->updated_at;
+                $form['kategori'] = '';
+                if($dataForm->kategori_isian) {
+                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                }
+                $form['jenis'] = '';
+                if($dataForm->jenis_form) {
+                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                }
+
+                return $form;
+            });
 
             return response()->json([
                 'success' => true,
@@ -150,11 +182,25 @@ class FormController extends Controller
                 ]);
             }
 
+            $data['uuid'] = $form->uuid;
+            $data['judul'] = $form->judul;
+            $data['status'] = $form->status;
+            $data['created_at'] = $form->created_at;
+            $data['updated_at'] = $form->updated_at;
+            $data['kategori'] = '';
+            if($form->kategori_isian) {
+                $data['kategori'] = str_replace('-', ' ', $form->kategori_isian->kode) ?? '';
+            }
+            $data['jenis'] = '';
+            if($form->jenis_form) {
+                $data['jenis'] = $form->jenis_form->nama  ?? '';
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data Form',
                 'code'    => 200,
-                'data'    => $form,
+                'data'    => $data,
             ]);
         } catch (\Throwable $th) {
             return writeLog($th->getMessage());
