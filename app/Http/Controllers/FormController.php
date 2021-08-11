@@ -1,0 +1,220 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\FormIsian;
+use Illuminate\Support\Facades\DB;
+use GrahamCampbell\Flysystem\Facades\Flysystem;
+use Illuminate\Support\Facades\Hash;
+
+class FormController extends Controller
+{
+   
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    public function index(Request $request)
+    {
+        try {
+            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
+
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengguna tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Form',
+                'code'    => 200,
+                'data'    => $form,
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    public function formCCTV(Request $request)
+    {
+        try {
+            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
+
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            // $form = $form->map(function ($dataForm) {
+            //     $form = [];
+            //     $form['uuid'] = $dataForm->uuid;
+            //     $form['judul'] = $dataForm->judul;
+            //     $form['status'] = $dataForm->status;
+            //     $form['created_at'] = $dataForm->created_at;
+            //     $form['updated_at'] = $dataForm->updated_at;
+            //     $form['kategori'] = '';
+            //     if($dataForm->kategori_isian) {
+            //         $form['kategori'] = [
+            //             'uuid' => $dataForm->kategori_isian->uuid ?? '',
+            //             'nama' => str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '',
+            //         ];
+            //     }
+            //     $form['jenis'] = '';
+            //     if($dataForm->form_jenis) {
+            //         $form['jenis'] = [
+            //             'uuid' => $dataForm->jenisForm->uuid  ?? '',
+            //             'nama' => $dataForm->jenisForm->nama  ?? '',
+            //         ];
+            //     }
+
+            //     return $form;
+            // });
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Form CCTV',
+                'code'    => 200,
+                'data'    => $form,
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    public function formCLEANING(Request $request)
+    {
+        try {
+            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
+
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Form Cleaning',
+                'code'    => 200,
+                'data'    => $form,
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    public function formFACILITIES(Request $request)
+    {
+        try {
+            $form = FormIsian::with(['jenisForm', 'kategori_isian'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
+
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Form Facilities',
+                'code'    => 200,
+                'data'    => $form,
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
+        try {
+            $form = FormIsian::where('uuid', $id)->first();
+
+            if (!$form) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Form',
+                'code'    => 200,
+                'data'    => $form,
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    // public function update()
+    // {
+    //     $this->validate($this->request, [
+    //         'tgllahir' => 'required',
+    //         'jenis_kelamin' => 'required',
+    //         'alamat' => 'required',
+    //         // 'foto'   => 'required',
+    //     ]);
+
+    //     DB::beginTransaction();
+    //     try {
+    //         $decodeToken = parseJwt($this->request->header('Authorization'));
+    //         $uuid        = $decodeToken->user->uuid;
+    //         $user   = Profile::where('user_id', $uuid)->first();
+
+    //         if (!$user) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Pengguna tidak ditemukan',
+    //                 'code'    => 404,
+    //             ]);
+    //         }
+
+            
+    //         $pathfoto = $user->foto;
+    //         if ($this->request->foto) {
+    //             $foto     = base64_decode($this->request->foto);
+    //             $pathfoto = 'profile/foto/'. $uuid.'.png';
+    //             $upload   = Flysystem::connection('awss3')->put($pathfoto, $foto);
+    //         } 
+
+    //         $user->update([
+    //             'tgllahir' => date('Y-m-d', strtotime($this->request->tgllahir)),
+    //             'jenis_kelamin' => $this->request->jenis_kelamin,
+    //             'alamat' => $this->request->alamat,
+    //             'foto'   => $pathfoto,
+    //         ]);
+
+    //         $user = User::with('profile')->where('uuid', $uuid)->first();
+    //         $aksesToken = generateJwt($user);
+
+    //         DB::commit();
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Berhasil ubah profil',
+    //             'code'    => 200,
+    //             'data'    => [
+    //                 'akses_token' => $aksesToken,
+    //             ]
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         DB::rollback();
+    //         return writeLog($th->getMessage());
+    //     }
+    // }
+
+}

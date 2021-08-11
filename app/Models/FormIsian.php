@@ -31,6 +31,11 @@ class FormIsian extends Model
         return $this->hasOne(FormJenis::class, 'kode', 'form_jenis');
     }
 
+    public function kategori_isian()
+    {
+        return $this->hasOne(FormIsianKategori::class, 'kode', 'kategori');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return formatTanggal($value);

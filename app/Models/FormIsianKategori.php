@@ -21,4 +21,14 @@ class FormIsianKategori extends Model
     protected $connection = 'pelindo_repport';
     protected $table      = 'ms_form_isian_kategori';
     protected $guarded    = [];
+
+    public function getCreatedAtAttribute($value)
+    {
+        return formatTanggal($value);
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return formatTanggal($value);
+    }
 }
