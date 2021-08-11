@@ -4,10 +4,12 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use App\Models\Profile;
+use App\Models\FormJenis;
+use App\Models\FormIsian;
+use App\Models\FormIsianKategori;
+use App\Models\FormPilihan;
 
-class UsersSeeder extends Seeder
+class FormIsianSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,68 +18,63 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $jumlahSpa      = 10;
-        $jumlahSpv      = 10;
-        $jumlahEos      = 10;
-
-        // buat superadmin
-        for ($i = 1; $i <= $jumlahSpa; $i++) {
-            $userSpa = User::create([
-                'nama' => 'superadmin' . $i,
-                'email'   => 'superadmin' . $i . '@gmail.com',
-                'password' => Hash::make('superadmin' . $i),
-                'no_hp'   => '08' . str_shuffle('1234567890'),
-                'role'     => env('ROLE_SPA'),
-                'uuid'     => generateUuid(),
-            ]);
-
-            // Profile SUPERADMIN
-            $dataSuperadmin = Profile::create([
-                'alamat'  => 'Jl. Mantrijeron',
-                'foto'    => 'foto.jpg',
-                'user_id' => $userSpa->uuid,
-                'uuid'    => generateUuid(),
-            ]);
+        $jumlahIsian = 10;
+        $jenisForm = FormJenis::all();
+        $isianKategori = FormIsianKategori::all();
+        $kategori = [];
+        foreach($isianKategori as $item) {
+            array_push($kategori, $item->kode);
         }
 
-        // buat supervisor
-        for ($i = 1; $i <= $jumlahSpv; $i++) {
-            $userSpv = User::create([
-                'nama'     => 'Supervisor ' . $i,
-                'email'    => 'supervisor' . $i . '@gmail.com',
-                'password' => Hash::make('supervisor' . $i),
-                'no_hp'    => '08' . str_shuffle('1234567890'),
-                'role'     => env('ROLE_SPV'),
-                'uuid'     => generateUuid(),
-            ]);
+        $pilihanCCTV = ['OK', 'NOT OK', 'NOT APPUCABLE'];
+        $pilihanCLEANING = ['OK', 'NOT OK', 'NOT APPUCABLE'];
+        $pilihanFCT = ['OK', 'NOT OK', 'NOT APPUCABLE', 'SMOKE PHOTOELECTRIC', 'SMOKE IONIZATION'];
 
-            // Profile Super Visor
-            $dataSuperVisor = Profile::create([
-                'alamat'   => 'Jl. Mantrijeron',
-                'foto'     => 'foto.jpg',
-                'user_id'  => $userSpv->uuid,
-                'uuid'     => generateUuid(),
-            ]);
-        }
+        foreach ($jenisForm as $item) {
 
-        // buat eos
-        for ($i = 1; $i <= $jumlahEos; $i++) {
-            $userEos = User::create([
-                'nama'     => 'Engineer On Site ' . $i,
-                'email'    => 'eos' . $i . '@gmail.com',
-                'password' => Hash::make('123456789'),
-                'no_hp'    => '08' . str_shuffle('1234567890'),
-                'role'     => env('ROLE_EOS'),
-                'uuid'     => generateUuid(),
-            ]);
+            for ($i = 1; $i <= $jumlahIsian; $i++) {
+                $randomKategori = array_rand($kategori);
+                
+                $isian = FormIsian::create([
+                    'uuid'       => generateUuid(),
+                    'judul'      => 'Form Isian '.ucwords($item->kode).' Ke '.$i,
+                    'form_jenis' => $item->kode,
+                    'kategori'   => $kategori[$randomKategori],
+                    'status'     => 1,
+                ]);
 
-            // Profile EOS
-            $dataEODS = Profile::create([
-                'uuid'     => generateUuid(),
-                'user_id'  => $userEos->uuid,
-                'alamat'   => 'Jl. Joko Tingkir',
-                'foto'     => 'foto.jpg',
-            ]);
+                if($item->kode == env('FORM_CCTV')) {
+                    foreach ($pilihanCCTV as $id => $val) {
+                        FormPilihan::create([
+                            'uuid'    => generateUuid(),
+                            'pilihan' => $val,
+                            'isian_id' => $isian->uuid,
+                        ]);
+                    }
+                }
+
+                if($item->kode == env('FORM_CLEANING')) {
+                    foreach ($pilihanCLEANING as $id => $val) {
+                        FormPilihan::create([
+                            'uuid'    => generateUuid(),
+                            'pilihan' => $val,
+                            'isian_id' => $isian->uuid,
+                        ]);
+                    }
+                }
+
+                if($item->kode == env('FORM_FACILITIES')) {
+                    foreach ($pilihanFCT as $id => $val) {
+                        FormPilihan::create([
+                            'uuid'    => generateUuid(),
+                            'pilihan' => $val,
+                            'isian_id' => $isian->uuid,
+                        ]);
+                    }
+                }
+
+            }
+            
         }
 
     }
