@@ -19,7 +19,7 @@ class FormController extends Controller
     public function index(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
 
             if (!$form) {
                 return response()->json([
@@ -43,7 +43,7 @@ class FormController extends Controller
     public function formCCTV(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -67,6 +67,18 @@ class FormController extends Controller
                 $form['jenis'] = '';
                 if($dataForm->jenis_form) {
                     $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                }
+                $form['pilihan'] = [];
+                if($dataForm->pilihan) {
+                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                        $pilihan = [];
+                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+
+                        return $pilihan;
+                    });
+
+                    $form['pilihan'] = $pilihan;
                 }
 
                 return $form;
@@ -86,7 +98,7 @@ class FormController extends Controller
     public function formCLEANING(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -110,6 +122,18 @@ class FormController extends Controller
                 $form['jenis'] = '';
                 if($dataForm->jenis_form) {
                     $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                }
+                $form['pilihan'] = [];
+                if($dataForm->pilihan) {
+                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                        $pilihan = [];
+                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+
+                        return $pilihan;
+                    });
+
+                    $form['pilihan'] = $pilihan;
                 }
 
                 return $form;
@@ -129,7 +153,7 @@ class FormController extends Controller
     public function formFACILITIES(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
 
             if (!$form) {
                 return response()->json([
@@ -154,6 +178,18 @@ class FormController extends Controller
                 if($dataForm->jenis_form) {
                     $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
                 }
+                $form['pilihan'] = [];
+                if($dataForm->pilihan) {
+                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                        $pilihan = [];
+                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+
+                        return $pilihan;
+                    });
+
+                    $form['pilihan'] = $pilihan;
+                }
 
                 return $form;
             });
@@ -172,7 +208,7 @@ class FormController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $form = FormIsian::where('uuid', $id)->first();
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('uuid', $id)->first();
 
             if (!$form) {
                 return response()->json([
@@ -182,11 +218,13 @@ class FormController extends Controller
                 ]);
             }
 
+            $data = [];
             $data['uuid'] = $form->uuid;
             $data['judul'] = $form->judul;
             $data['status'] = $form->status;
             $data['created_at'] = $form->created_at;
             $data['updated_at'] = $form->updated_at;
+
             $data['kategori'] = '';
             if($form->kategori_isian) {
                 $data['kategori'] = str_replace('-', ' ', $form->kategori_isian->kode) ?? '';
@@ -194,6 +232,13 @@ class FormController extends Controller
             $data['jenis'] = '';
             if($form->jenis_form) {
                 $data['jenis'] = $form->jenis_form->nama  ?? '';
+            }
+            $data['pilihan'] = [];
+            if($form->pilihan) {
+                foreach($form->pilihan as $id => $item) {
+                    $data['pilihan'][$id]['uuid'] = $item->uuid ?? '';
+                    $data['pilihan'][$id]['pilihan'] = $item->pilihan ?? '';
+                }
             }
 
             return response()->json([
