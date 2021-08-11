@@ -17,10 +17,6 @@ $router->get('/', function () use ($router) {
     echo 'API Pelindo Report - Form Laporan';
 });
 
-$router->get('/tes', function () use ($router) {
-    echo 'tes';
-});
-
 $router->post('/login', 'AuthController@authenticate');
 
 $router->group(['prefix' => 'lupapassword'], function() use ($router) {
