@@ -19,6 +19,7 @@ class CreateMsFormIsianTable extends Migration
             $table->string('judul');
             $table->string('form_jenis');
             $table->string('kategori');
+            $table->string('tipe');
             $table->integer('status')->length(1)->default(1);
             $table->timestamps();
         });

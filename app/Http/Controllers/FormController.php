@@ -65,6 +65,7 @@ class FormController extends Controller
                     $form['status'] = $dataForm->status;
                     $form['created_at'] = $dataForm->created_at;
                     $form['updated_at'] = $dataForm->updated_at;
+                    $form['tipe'] = $dataForm->tipe;
                     $form['kategori'] = '';
                     if($dataForm->kategori_isian) {
                         $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
@@ -130,6 +131,7 @@ class FormController extends Controller
                     $form['status'] = $dataForm->status;
                     $form['created_at'] = $dataForm->created_at;
                     $form['updated_at'] = $dataForm->updated_at;
+                    $form['tipe'] = $dataForm->tipe;
                     $form['kategori'] = '';
                     if($dataForm->kategori_isian) {
                         $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
@@ -195,6 +197,7 @@ class FormController extends Controller
                     $form['status'] = $dataForm->status;
                     $form['created_at'] = $dataForm->created_at;
                     $form['updated_at'] = $dataForm->updated_at;
+                    $form['tipe'] = $dataForm->tipe;
                     $form['kategori'] = '';
                     if($dataForm->kategori_isian) {
                         $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
@@ -255,6 +258,7 @@ class FormController extends Controller
             $data['status'] = $form->status;
             $data['created_at'] = $form->created_at;
             $data['updated_at'] = $form->updated_at;
+            $data['tipe'] = $form->tipe;
 
             $data['kategori'] = '';
             if($form->kategori_isian) {
