@@ -90,7 +90,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = $dataKategori->kode;
+                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
                 $data['data'] = $form;
                 
                 return $data;
@@ -156,7 +156,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = $dataKategori->kode;
+                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
                 $data['data'] = $form;
 
                 return $data;
@@ -222,7 +222,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = $dataKategori->kode;
+                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
                 $data['data'] = $form;
 
                 return $data;
