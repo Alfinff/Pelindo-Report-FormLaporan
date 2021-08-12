@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FormIsian;
+use App\Models\FormIsianKategori;
 use Illuminate\Support\Facades\DB;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 use Illuminate\Support\Facades\Hash;
@@ -43,9 +44,9 @@ class FormController extends Controller
     public function formCCTV(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
+            $formKategoriIsian = FormIsianKategori::where('form_jenis', env('FORM_CCTV'))->get();
 
-            if (!$form) {
+            if (!$formKategoriIsian) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
@@ -53,42 +54,52 @@ class FormController extends Controller
                 ]);
             }
 
-            $form = $form->map(function ($dataForm) {
-                $form = [];
-                $form['uuid'] = $dataForm->uuid;
-                $form['judul'] = $dataForm->judul;
-                $form['status'] = $dataForm->status;
-                $form['created_at'] = $dataForm->created_at;
-                $form['updated_at'] = $dataForm->updated_at;
-                $form['kategori'] = '';
-                if($dataForm->kategori_isian) {
-                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
-                }
-                $form['jenis'] = '';
-                if($dataForm->jenis_form) {
-                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
-                }
-                $form['pilihan'] = [];
-                if($dataForm->pilihan) {
-                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
-                        $pilihan = [];
-                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
-                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+            $data = $formKategoriIsian->map(function ($dataKategori) {
+                $data = [];
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
 
-                        return $pilihan;
-                    });
+                $form = $form->map(function ($dataForm) {
+                    $form = [];
+                    $form['uuid'] = $dataForm->uuid;
+                    $form['judul'] = $dataForm->judul;
+                    $form['status'] = $dataForm->status;
+                    $form['created_at'] = $dataForm->created_at;
+                    $form['updated_at'] = $dataForm->updated_at;
+                    $form['kategori'] = '';
+                    if($dataForm->kategori_isian) {
+                        $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                    }
+                    $form['jenis'] = '';
+                    if($dataForm->jenis_form) {
+                        $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                    }
+                    $form['pilihan'] = [];
+                    if($dataForm->pilihan) {
+                        $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                            $pilihan = [];
+                            $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                            $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
 
-                    $form['pilihan'] = $pilihan;
-                }
+                            return $pilihan;
+                        });
 
-                return $form;
+                        $form['pilihan'] = $pilihan;
+                    }
+
+                    return $form;
+                });
+
+                $data['kategori'] = $dataKategori->kode;
+                $data['data'] = $form;
+                
+                return $data;
             });
 
             return response()->json([
                 'success' => true,
                 'message' => 'Data Form CCTV',
                 'code'    => 200,
-                'data'    => $form,
+                'data'    => $data,
             ]);
         } catch (\Throwable $th) {
             return writeLog($th->getMessage());
@@ -98,9 +109,9 @@ class FormController extends Controller
     public function formCLEANING(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
+            $formKategoriIsian = FormIsianKategori::where('form_jenis', env('FORM_CLEANING'))->get();
 
-            if (!$form) {
+            if (!$formKategoriIsian) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
@@ -108,42 +119,52 @@ class FormController extends Controller
                 ]);
             }
 
-            $form = $form->map(function ($dataForm) {
-                $form = [];
-                $form['uuid'] = $dataForm->uuid;
-                $form['judul'] = $dataForm->judul;
-                $form['status'] = $dataForm->status;
-                $form['created_at'] = $dataForm->created_at;
-                $form['updated_at'] = $dataForm->updated_at;
-                $form['kategori'] = '';
-                if($dataForm->kategori_isian) {
-                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
-                }
-                $form['jenis'] = '';
-                if($dataForm->jenis_form) {
-                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
-                }
-                $form['pilihan'] = [];
-                if($dataForm->pilihan) {
-                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
-                        $pilihan = [];
-                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
-                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+            $data = $formKategoriIsian->map(function ($dataKategori) {
+                $data = [];
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
 
-                        return $pilihan;
-                    });
+                $form = $form->map(function ($dataForm) {
+                    $form = [];
+                    $form['uuid'] = $dataForm->uuid;
+                    $form['judul'] = $dataForm->judul;
+                    $form['status'] = $dataForm->status;
+                    $form['created_at'] = $dataForm->created_at;
+                    $form['updated_at'] = $dataForm->updated_at;
+                    $form['kategori'] = '';
+                    if($dataForm->kategori_isian) {
+                        $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                    }
+                    $form['jenis'] = '';
+                    if($dataForm->jenis_form) {
+                        $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                    }
+                    $form['pilihan'] = [];
+                    if($dataForm->pilihan) {
+                        $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                            $pilihan = [];
+                            $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                            $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
 
-                    $form['pilihan'] = $pilihan;
-                }
+                            return $pilihan;
+                        });
 
-                return $form;
+                        $form['pilihan'] = $pilihan;
+                    }
+
+                    return $form;
+                });
+
+                $data['kategori'] = $dataKategori->kode;
+                $data['data'] = $form;
+
+                return $data;
             });
 
             return response()->json([
                 'success' => true,
                 'message' => 'Data Form Cleaning',
                 'code'    => 200,
-                'data'    => $form,
+                'data'    => $data,
             ]);
         } catch (\Throwable $th) {
             return writeLog($th->getMessage());
@@ -153,9 +174,9 @@ class FormController extends Controller
     public function formFACILITIES(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
+            $formKategoriIsian = FormIsianKategori::where('form_jenis', env('FORM_FACILITIES'))->get();
 
-            if (!$form) {
+            if (!$formKategoriIsian) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
@@ -163,42 +184,52 @@ class FormController extends Controller
                 ]);
             }
 
-            $form = $form->map(function ($dataForm) {
-                $form = [];
-                $form['uuid'] = $dataForm->uuid;
-                $form['judul'] = $dataForm->judul;
-                $form['status'] = $dataForm->status;
-                $form['created_at'] = $dataForm->created_at;
-                $form['updated_at'] = $dataForm->updated_at;
-                $form['kategori'] = '';
-                if($dataForm->kategori_isian) {
-                    $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
-                }
-                $form['jenis'] = '';
-                if($dataForm->jenis_form) {
-                    $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
-                }
-                $form['pilihan'] = [];
-                if($dataForm->pilihan) {
-                    $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
-                        $pilihan = [];
-                        $pilihan['uuid'] = $dataPilihan->uuid ?? '';
-                        $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+            $data = $formKategoriIsian->map(function ($dataKategori) {
+                $data = [];
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
 
-                        return $pilihan;
-                    });
+                $form = $form->map(function ($dataForm) {
+                    $form = [];
+                    $form['uuid'] = $dataForm->uuid;
+                    $form['judul'] = $dataForm->judul;
+                    $form['status'] = $dataForm->status;
+                    $form['created_at'] = $dataForm->created_at;
+                    $form['updated_at'] = $dataForm->updated_at;
+                    $form['kategori'] = '';
+                    if($dataForm->kategori_isian) {
+                        $form['kategori'] = str_replace('-', ' ', $dataForm->kategori_isian->kode) ?? '';
+                    }
+                    $form['jenis'] = '';
+                    if($dataForm->jenis_form) {
+                        $form['jenis'] = $dataForm->jenis_form->nama  ?? '';
+                    }
+                    $form['pilihan'] = [];
+                    if($dataForm->pilihan) {
+                        $pilihan = $dataForm->pilihan->map(function ($dataPilihan) {
+                            $pilihan = [];
+                            $pilihan['uuid'] = $dataPilihan->uuid ?? '';
+                            $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
 
-                    $form['pilihan'] = $pilihan;
-                }
+                            return $pilihan;
+                        });
 
-                return $form;
+                        $form['pilihan'] = $pilihan;
+                    }
+
+                    return $form;
+                });
+
+                $data['kategori'] = $dataKategori->kode;
+                $data['data'] = $form;
+
+                return $data;
             });
 
             return response()->json([
                 'success' => true,
                 'message' => 'Data Form Facilities',
                 'code'    => 200,
-                'data'    => $form,
+                'data'    => $data,
             ]);
         } catch (\Throwable $th) {
             return writeLog($th->getMessage());
