@@ -51,6 +51,7 @@ class FormController extends Controller
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
                     'code'    => 404,
+                    'tipe'    => env('FORM_CCTV'),
                 ]);
             }
 
@@ -101,6 +102,7 @@ class FormController extends Controller
                 'success' => true,
                 'message' => 'Data Form CCTV',
                 'code'    => 200,
+                'tipe'    => env('FORM_CCTV'),
                 'data'    => $data,
             ]);
         } catch (\Throwable $th) {
@@ -118,6 +120,7 @@ class FormController extends Controller
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
                     'code'    => 404,
+                    'tipe'    => env('FORM_CLEANING')
                 ]);
             }
 
@@ -168,6 +171,7 @@ class FormController extends Controller
                 'success' => true,
                 'message' => 'Data Form Cleaning',
                 'code'    => 200,
+                'tipe'    => env('FORM_CLEANING'),
                 'data'    => $data,
             ]);
         } catch (\Throwable $th) {
@@ -185,6 +189,7 @@ class FormController extends Controller
                     'success' => false,
                     'message' => 'Data tidak ditemukan',
                     'code'    => 404,
+                    'tipe'    => env('FORM_FACILITIES')
                 ]);
             }
 
@@ -235,6 +240,7 @@ class FormController extends Controller
                 'success' => true,
                 'message' => 'Data Form Facilities',
                 'code'    => 200,
+                'tipe'    => env('FORM_FACILITIES'),
                 'data'    => $data,
             ]);
         } catch (\Throwable $th) {
