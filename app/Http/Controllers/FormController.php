@@ -80,6 +80,7 @@ class FormController extends Controller
                             $pilihan = [];
                             $pilihan['uuid'] = $dataPilihan->uuid ?? '';
                             $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+                            $pilihan['laporan_id'] = $dataPilihan->isian_id;
 
                             return $pilihan;
                         });
@@ -90,7 +91,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
+                $data['kategori'] = $dataKategori->kode;
                 $data['data'] = $form;
                 
                 return $data;
@@ -146,6 +147,7 @@ class FormController extends Controller
                             $pilihan = [];
                             $pilihan['uuid'] = $dataPilihan->uuid ?? '';
                             $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+                            $pilihan['laporan_id'] = $dataPilihan->isian_id;
 
                             return $pilihan;
                         });
@@ -156,7 +158,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
+                $data['kategori'] = $dataKategori->kode;
                 $data['data'] = $form;
 
                 return $data;
@@ -212,6 +214,7 @@ class FormController extends Controller
                             $pilihan = [];
                             $pilihan['uuid'] = $dataPilihan->uuid ?? '';
                             $pilihan['pilihan'] = $dataPilihan->pilihan ?? '';
+                            $pilihan['laporan_id'] = $dataPilihan->isian_id;
 
                             return $pilihan;
                         });
@@ -222,7 +225,7 @@ class FormController extends Controller
                     return $form;
                 });
 
-                $data['kategori'] = str_replace('-', ' ', $dataKategori->kode) ?? '';
+                $data['kategori'] = $dataKategori->kode;
                 $data['data'] = $form;
 
                 return $data;
