@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\FormIsian;
 use App\Models\FormIsianKategori;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
 use Illuminate\Support\Facades\Hash;
 
