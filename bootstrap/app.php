@@ -75,15 +75,17 @@ $app->configure('mail');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\CorsMiddleware::class
+]);
 
 $app->routeMiddleware([
 	'jwt.auth'        => App\Http\Middleware\JwtMiddleware::class,
 	'role.superadmin' => App\Http\Middleware\SuperAdminMiddleware::class,
 	'role.supervisor'    => App\Http\Middleware\SuperVisorMiddleware::class,
 	'role.eos'  => App\Http\Middleware\EOSMiddleware::class,
+    'role.super' => App\Http\Middleware\SuperMiddleware::class,
 ]);
 
 
@@ -142,7 +144,7 @@ $app->router->group([
 // $app->make('url')->to(env('APP_URL'));
 // $app['url']->to(env('APP_URL'));
 
-//$app->make('url')->forceRootUrl(env('APP_URL', env('APP_URL')));
+$app->make('url')->forceRootUrl(env('APP_URL', 'https://pelindo.primakom.co.id/api/formlaporan/'));
 
 return $app;
 
