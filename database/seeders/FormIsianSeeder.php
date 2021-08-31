@@ -21,9 +21,9 @@ class FormIsianSeeder extends Seeder
         $jumlahIsian = 10;
         $jenisForm = FormJenis::all();
 
-        $pilihanCCTV = ['OK', 'NOT OK', 'NOT APPUCABLE'];
-        $pilihanCLEANING = ['OK', 'NOT OK', 'NOT APPUCABLE'];
-        $pilihanFCT = ['OK', 'NOT OK', 'NOT APPUCABLE', 'SMOKE PHOTOELECTRIC', 'SMOKE IONIZATION'];
+        $pilihanCCTV = ['OK', 'NOT OK', 'NOT APPLICABLE'];
+        $pilihanCLEANING = ['OK', 'NOT OK', 'NOT APPLICABLE'];
+        $pilihanFCT = ['OK', 'NOT OK', 'NOT APPLICABLE', 'SMOKE PHOTOELECTRIC', 'SMOKE IONIZATION'];
         $pilihanDROPDOWN_WARNA = ['HIJAU (penuh)', 'MERAH (kosong)'];
         $pilihanDROPDOWN_KONDISI = ['NORMAL', 'CRITICAL'];
 
