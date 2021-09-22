@@ -29,6 +29,7 @@ class FormIsianSeeder extends Seeder
         $pilihanFCTDROPDOWN_KONDISI = ['NORMAL', 'CRITICAL'];
         $pilihanFCTDROPDOWN_KONDISI_SMOKE = ['NORMAL', 'NOT OK'];
         $pilihanFCTDROPDOWN_SIRINE = ['STANDBY', 'NOT OK'];
+        $ISIAN = [];
 
         $FormCCTV = [
             'CCTV-DATA-CENTER' => [
@@ -208,41 +209,41 @@ class FormIsianSeeder extends Seeder
             'PAC' => [
                 'tipe' => 'ISIAN',
                 'data' => [
-                    'Pac 1 Temperature (℃)', 
-                    'Pac 1 humidity (RH%)', 
-                    'Pac 2 Temperature (℃)', 
-                    'Pac 2 humidity (RH%)', 
-                    'Pac 3 Temperature (℃)', 
-                    'Pac 3 humidity (RH%)', 
-                    'Pac 4 Temperature (℃)', 
-                    'Pac 4 humidity (RH%)', 
-                    'Pac 5 Temperature (℃)', 
-                    'Pac 5 humidity (RH%)'
+                    'Pac 1 Temperature (℃)' => $ISIAN, 
+                    'Pac 1 humidity (RH%)' => $ISIAN, 
+                    'Pac 2 Temperature (℃)' => $ISIAN, 
+                    'Pac 2 humidity (RH%)' => $ISIAN, 
+                    'Pac 3 Temperature (℃)' => $ISIAN, 
+                    'Pac 3 humidity (RH%)' => $ISIAN, 
+                    'Pac 4 Temperature (℃)' => $ISIAN, 
+                    'Pac 4 humidity (RH%)' => $ISIAN, 
+                    'Pac 5 Temperature (℃)' => $ISIAN, 
+                    'Pac 5 humidity (RH%)' => $ISIAN
                 ]
             ], 
             'UPS' => [
                 'tipe' => 'ISIAN',
                 'data' => [
-                    'UPS 1 Voltage (Vac) (R)', 
-                    'UPS 1 Ampere (A) (R)', 
-                    'Load Level (%) (R)', 
-                    'UPS 2 Voltage (Vac) (R)', 
-                    'UPS 2 Ampere (A) (R)', 
-                    'Load Level (%) (R)',
+                    'UPS 1 Voltage (Vac) (R)'=> $ISIAN, 
+                    'UPS 1 Ampere (A) (R)'=> $ISIAN, 
+                    'Load Level (%) (R)'=> $ISIAN, 
+                    'UPS 2 Voltage (Vac) (R)' => $ISIAN,
+                    'UPS 2 Ampere (A) (R)' => $ISIAN,
+                    'Load Level (%) (R)' => $ISIAN,
 
-                    'UPS 1 Voltage (Vac) (S)', 
-                    'UPS 1 Ampere (A) (S)', 
-                    'Load Level (%) (S)', 
-                    'UPS 2 Voltage (Vac) (S)', 
-                    'UPS 2 Ampere (A) (S)', 
-                    'Load Level (%) (S)',
+                    'UPS 1 Voltage (Vac) (S)' => $ISIAN, 
+                    'UPS 1 Ampere (A) (S)' => $ISIAN, 
+                    'Load Level (%) (S)' => $ISIAN, 
+                    'UPS 2 Voltage (Vac) (S)' => $ISIAN, 
+                    'UPS 2 Ampere (A) (S)' => $ISIAN, 
+                    'Load Level (%) (S)' => $ISIAN,
 
-                    'UPS 1 Voltage (Vac) (T)', 
-                    'UPS 1 Ampere (A) (T)', 
-                    'Load Level (%) (T)', 
-                    'UPS 2 Voltage (Vac) (T)', 
-                    'UPS 2 Ampere (A) (T)', 
-                    'Load Level (%) (T)',
+                    'UPS 1 Voltage (Vac) (T)' => $ISIAN, 
+                    'UPS 1 Ampere (A) (T)' => $ISIAN, 
+                    'Load Level (%) (T)' => $ISIAN, 
+                    'UPS 2 Voltage (Vac) (T)' => $ISIAN, 
+                    'UPS 2 Ampere (A) (T)' => $ISIAN, 
+                    'Load Level (%) (T)' => $ISIAN,
                 ]
             ], 
             'UPS-APC' => [
