@@ -224,42 +224,45 @@ class FormIsianSeeder extends Seeder
             'UPS' => [
                 'tipe' => 'ISIAN',
                 'data' => [
-                    'UPS 1 Voltage (Vac) (R)'=> $ISIAN, 
                     'UPS 1 Ampere (A) (R)'=> $ISIAN, 
-                    'Load Level (%) (R)'=> $ISIAN, 
-                    'UPS 2 Voltage (Vac) (R)' => $ISIAN,
-                    'UPS 2 Ampere (A) (R)' => $ISIAN,
-                    'Load Level (%) (R)' => $ISIAN,
-
-                    'UPS 1 Voltage (Vac) (S)' => $ISIAN, 
                     'UPS 1 Ampere (A) (S)' => $ISIAN, 
-                    'Load Level (%) (S)' => $ISIAN, 
-                    'UPS 2 Voltage (Vac) (S)' => $ISIAN, 
-                    'UPS 2 Ampere (A) (S)' => $ISIAN, 
-                    'Load Level (%) (S)' => $ISIAN,
-
-                    'UPS 1 Voltage (Vac) (T)' => $ISIAN, 
                     'UPS 1 Ampere (A) (T)' => $ISIAN, 
-                    'Load Level (%) (T)' => $ISIAN, 
+
+                    'UPS 1 Voltage (Vac) (R)'=> $ISIAN, 
+                    'UPS 1 Voltage (Vac) (S)' => $ISIAN, 
+                    'UPS 1 Voltage (Vac) (T)' => $ISIAN, 
+
+                    'UPS 1 Load Level (%) (R)'=> $ISIAN, 
+                    'UPS 1 Load Level (%) (S)' => $ISIAN,
+                    'UPS 1 Load Level (%) (T)' => $ISIAN,
+                    
+                    'UPS 2 Ampere (A) (R)' => $ISIAN,
+                    'UPS 2 Ampere (A) (S)' => $ISIAN,
+                    'UPS 2 Ampere (A) (T)' => $ISIAN,   
+
+                    'UPS 2 Voltage (Vac) (R)' => $ISIAN,
+                    'UPS 2 Voltage (Vac) (S)' => $ISIAN, 
                     'UPS 2 Voltage (Vac) (T)' => $ISIAN, 
-                    'UPS 2 Ampere (A) (T)' => $ISIAN, 
-                    'Load Level (%) (T)' => $ISIAN,
+
+                    'UPS 2 Load Level (%) (R)' => $ISIAN, 
+                    'UPS 2 Load Level (%) (S)' => $ISIAN,
+                    'UPS 2 Load Level (%) (T)' => $ISIAN,
                 ]
             ], 
             'UPS-APC' => [
-                'tipe' => 'DROPDOWN',
+                'tipe' => 'ISIAN',
                 'data' => [
-                    'Vout (Vac) (R)' => $pilihanFCT, 
-                    'Vout (Vac) (S)' => $pilihanFCT, 
-                    'Vout (Vac) (T)' => $pilihanFCT, 
+                    'Vout (Vac) (R)' => $ISIAN, 
+                    'Vout (Vac) (S)' => $ISIAN, 
+                    'Vout (Vac) (T)' => $ISIAN, 
 
-                    'Iout (A) (R)' => $pilihanFCT, 
-                    'Iout (A) (S)' => $pilihanFCT, 
-                    'Iout (A) (T)' => $pilihanFCT, 
+                    'Iout (A) (R)' => $ISIAN, 
+                    'Iout (A) (S)' => $ISIAN, 
+                    'Iout (A) (T)' => $ISIAN, 
 
-                    'Runtime (min) (R)' => $pilihanFCT,
-                    'Runtime (min) (S)' => $pilihanFCT,
-                    'Runtime (min) (T)' => $pilihanFCT,
+                    'Runtime (min) (R)' => $ISIAN,
+                    'Runtime (min) (S)' => $ISIAN,
+                    'Runtime (min) (T)' => $ISIAN,
                 ]
             ], 
             'SIRINE-&-SENSOR' => [
