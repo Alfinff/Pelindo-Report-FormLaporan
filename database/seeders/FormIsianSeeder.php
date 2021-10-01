@@ -29,6 +29,7 @@ class FormIsianSeeder extends Seeder
         $pilihanFCTDROPDOWN_KONDISI = ['NORMAL', 'CRITICAL'];
         $pilihanFCTDROPDOWN_KONDISI_SMOKE = ['NORMAL', 'NOT OK'];
         $pilihanFCTDROPDOWN_SIRINE = ['STANDBY', 'NOT OK'];
+        $PAC = ['ON', 'OFF'];
         $ISIAN = [];
 
         $FormCCTV = [
@@ -207,18 +208,18 @@ class FormIsianSeeder extends Seeder
                 ]
             ], 
             'PAC' => [
-                'tipe' => 'ISIAN',
+                'tipe' => 'DROPDOWN',
                 'data' => [
-                    'Pac 1 Temperature (℃)' => $ISIAN, 
-                    'Pac 1 humidity (RH%)' => $ISIAN, 
-                    'Pac 2 Temperature (℃)' => $ISIAN, 
-                    'Pac 2 humidity (RH%)' => $ISIAN, 
-                    'Pac 3 Temperature (℃)' => $ISIAN, 
-                    'Pac 3 humidity (RH%)' => $ISIAN, 
-                    'Pac 4 Temperature (℃)' => $ISIAN, 
-                    'Pac 4 humidity (RH%)' => $ISIAN, 
-                    'Pac 5 Temperature (℃)' => $ISIAN, 
-                    'Pac 5 humidity (RH%)' => $ISIAN
+                    'Pac 1 Temperature (℃)' => $PAC, 
+                    'Pac 1 humidity (RH%)' => $PAC, 
+                    'Pac 2 Temperature (℃)' => $PAC, 
+                    'Pac 2 humidity (RH%)' => $PAC, 
+                    'Pac 3 Temperature (℃)' => $PAC, 
+                    'Pac 3 humidity (RH%)' => $PAC, 
+                    'Pac 4 Temperature (℃)' => $PAC, 
+                    'Pac 4 humidity (RH%)' => $PAC, 
+                    'Pac 5 Temperature (℃)' => $PAC, 
+                    'Pac 5 humidity (RH%)' => $PAC
                 ]
             ], 
             'UPS' => [
