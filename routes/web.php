@@ -17,6 +17,21 @@ $router->get('/', function () use ($router) {
     echo 'API Pelindo Report - Form Laporan';
 });
 
+$router->get('/tesdb', function () use ($router) {
+    // Test database connection
+    try {
+        // DB::connection()->getPdo();
+        if(DB::connection()->getDatabaseName())
+        {
+            echo "conncted sucessfully to database ".DB::connection()->getDatabaseName();
+        } else {
+            echo 'no';
+        }
+    } catch (\Exception $e) {
+        die("Could not connect to the database.  Please check your configuration. error:" . $e );
+    }
+});
+
 $router->group(['prefix' => 'superadmin', 'middleware' => ['jwt.auth', 'role.superadmin']], function() use ($router) {
     // crud form
     $router->group(['prefix' => 'form'], function() use ($router) {
