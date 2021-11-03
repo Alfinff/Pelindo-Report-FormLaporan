@@ -151,6 +151,7 @@ class FormIsianSeeder extends Seeder
                 'data' => [
                     'PAC 01', 
                     'PAC 02', 
+                    'PAC 03', 
                     'KEBERSIHAN LANTAI',
                     'KEBERSIHAN PANEL'
                 ]
