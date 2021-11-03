@@ -66,7 +66,8 @@ class FormIsianSeeder extends Seeder
                 'data' => [
                     'KEBERSIHAN LANTAI', 
                     'KEBERSIHAN MEJA', 
-                    'KEBERSIHAN PC'
+                    'KEBERSIHAN PC',
+                    'KEBERSIHAN MONITOR TV'
                 ]
             ],
             'RUANG-MEET-ME' => [
@@ -118,10 +119,14 @@ class FormIsianSeeder extends Seeder
                     'RACK G4', 
                     'RACK G5', 
                     'RACK G6', 
+                    'RACK G7',
                     'RACK H1', 
                     'RACK H2', 
                     'RACK H3', 
-                    'RACK H4', 
+                    'RACK H4',
+                    'RACK H5',
+                    'RACK H6',
+                    'RACK H7', 
                     'KEBERSIHAN LANTAI', 
                     'KEBERSIHAN CAGE'
                 ]
@@ -293,13 +298,13 @@ class FormIsianSeeder extends Seeder
                     'SMOKE IONIZATION (SI) 007 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE PHOTOELECTRIC (SP) 020 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI) 019  Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE, 
-                    'SMOKE PHOTOELECTRIC SP) 018 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
+                    'SMOKE PHOTOELECTRIC (SP) 018 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                 ]
             ],
             'POWER-ROOM' => [
                 'tipe' => 'DROPDOWN_KONDISI',
                 'data' => [
-                    'SMOKE PHOTOELECTRIC SP) 039 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
+                    'SMOKE PHOTOELECTRIC (SP) 039 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI)  038 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE PHOTOELECTRIC (SP) 040 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI) 041  Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
@@ -310,7 +315,7 @@ class FormIsianSeeder extends Seeder
                 'data' => [
                     'SMOKE PHOTOELECTRIC (SP) 004 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI) 001  UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
-                    'SMOKE PHOTOELECTRIC SP) 002 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
+                    'SMOKE PHOTOELECTRIC (SP) 002 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI) 005  UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE PHOTOELECTRIC (SP) 012 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'SMOKE IONIZATION (SI) 015  Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
@@ -326,7 +331,7 @@ class FormIsianSeeder extends Seeder
                 'tipe' => 'DROPDOWN_KONDISI',
                 'data' => [
                     'SMOKE IONIZATION (SI) 003 UP' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
-                    'SMOKE PHOTOELECTRIC SP) 014 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
+                    'SMOKE PHOTOELECTRIC (SP) 014 Down' => $pilihanFCTDROPDOWN_KONDISI_SMOKE,
                     'WATER DETECTOR 7' => $pilihanFCTDROPDOWN_KONDISI,
                 ]
             ],
