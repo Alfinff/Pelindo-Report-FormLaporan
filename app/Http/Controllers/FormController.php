@@ -21,7 +21,7 @@ class FormController extends Controller
     public function index(Request $request)
     {
         try {
-            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->orderBy('kategori', 'asc')->get()->groupBy('form_jenis');
+            $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get()->groupBy('form_jenis');
 
             if (!$form) {
                 return response()->json([
@@ -58,7 +58,7 @@ class FormController extends Controller
 
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
-                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->get();
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
                     $form = [];
@@ -127,7 +127,7 @@ class FormController extends Controller
 
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
-                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->get();
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
                     $form = [];
@@ -196,7 +196,7 @@ class FormController extends Controller
 
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
-                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->get();
+                $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan'])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
                     $form = [];

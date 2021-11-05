@@ -28,8 +28,8 @@ class FormIsianSeeder extends Seeder
         $pilihanFCTDROPDOWN_WARNA = ['HIJAU (penuh)', 'MERAH (kosong)'];
         $pilihanFCTDROPDOWN_KONDISI = ['NORMAL', 'CRITICAL'];
         $pilihanFCTDROPDOWN_KONDISI_SMOKE = ['NORMAL', 'NOT OK'];
-        $pilihanFCTDROPDOWN_SIRINE = ['STANDBY', 'NOT OK'];
-        $PAC = ['ON', 'OFF'];
+        $pilihanFCTDROPDOWN_SIRINE = ['STANDBY', 'ALARM'];
+        $PAC = ['RUNNING', 'STANDBY'];
         $ISIAN = [];
 
         $FormCCTV = [
