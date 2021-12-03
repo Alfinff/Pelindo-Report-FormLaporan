@@ -267,9 +267,10 @@ class FormIsianSeeder extends Seeder
                     'Iout (A) (S)' => $ISIAN, 
                     'Iout (A) (T)' => $ISIAN, 
 
-                    'Runtime (min) (R)' => $ISIAN,
-                    'Runtime (min) (S)' => $ISIAN,
-                    'Runtime (min) (T)' => $ISIAN,
+                    'Runtime (min)' => $ISIAN,
+                    // 'Runtime (min) (R)' => $ISIAN,
+                    // 'Runtime (min) (S)' => $ISIAN,
+                    // 'Runtime (min) (T)' => $ISIAN,
                 ]
             ], 
             'SIRINE-&-SENSOR' => [
