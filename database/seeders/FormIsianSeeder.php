@@ -33,29 +33,29 @@ class FormIsianSeeder extends Seeder
         $ISIAN = [];
 
         $FormCCTV = [
-            'CCTV-DATA-CENTER' => [
+            'SAMSUNG-SND-5083R' => [
                 'tipe' => 'DROPDOWN',
                 'data' => [
-                    'CCTV DC R. Server Caging 1 Depan (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Server Caging 1 Pojok (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Server Caging 2 Depan (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Server Caging 2 Pojok (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Network 1 (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Network 2 (SAMSUNG SND-5083R)', 
-                    'CCTV DC Ruang Meet Me (SAMSUNG SND-5083R)', 
-                    'CCTV DC Pintu Masuk DC (SAMSUNG SND-5083R)', 
-                    'CCTV DC Pintu Keluar DC Tangga Darurat (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. UPS 1 (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. UPS 2 (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Tabung Gas FM (SAMSUNG SND-5083R)', 
-                    'CCTV DC Ruang NOC (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Staging (SAMSUNG SND-5083R)', 
-                    'CCTV DC Pintu Masuk R. Lt.2 (SAMSUNG SND-5083R)', 
-                    'CCTV DC Ruang Staf Lt.2 (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Genset Ground (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Genset Pintu Masuk (SAMSUNG SND-5083R)', 
-                    'CCTV DC R. Box Panel Ground (SAMSUNG SND-5083R)', 
-                    'CCTV DC Roof Top Gedung C 1 (SAMSUNG SND-5083R)'
+                    'R. Server Caging 1 Depan', 
+                    'R. Server Caging 1 Pojok', 
+                    'R. Server Caging 2 Depan', 
+                    'R. Server Caging 2 Pojok', 
+                    'R. Network 1', 
+                    'R. Network 2', 
+                    'Ruang Meet Me', 
+                    'Pintu Masuk DC', 
+                    'Pintu Keluar DC Tangga Darurat', 
+                    'R. UPS 1', 
+                    'R. UPS 2', 
+                    'R. Tabung Gas FM', 
+                    'Ruang NOC', 
+                    'R. Staging', 
+                    'Pintu Masuk R. Lt.2', 
+                    'Ruang Staf Lt.2', 
+                    'R. Genset Ground', 
+                    'R. Genset Pintu Masuk', 
+                    'R. Box Panel Ground', 
+                    'Roof Top Gedung C 1'
                 ]
             ]
         ];
