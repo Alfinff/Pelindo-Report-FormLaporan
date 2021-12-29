@@ -59,7 +59,12 @@ class FormController extends Controller
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
                 $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan' => function($query) {
-                    $query->orderBy('pilihan', 'asc');
+                    $query->orderByRaw("CASE pilihan
+                    WHEN 'OK' THEN 1
+                    WHEN 'NOT OK' THEN 2
+                    ELSE 3
+                    END ASC
+                    ");
                 }])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CCTV'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
@@ -130,7 +135,12 @@ class FormController extends Controller
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
                 $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan' => function($query) {
-                    $query->orderBy('pilihan', 'asc');
+                    $query->orderByRaw("CASE pilihan
+                    WHEN 'OK' THEN 1
+                    WHEN 'NOT OK' THEN 2
+                    ELSE 3
+                    END ASC
+                    ");
                 }])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_CLEANING'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
@@ -201,7 +211,17 @@ class FormController extends Controller
             $data = $formKategoriIsian->map(function ($dataKategori) {
                 $data = [];
                 $form = FormIsian::with(['jenis_form', 'kategori_isian', 'pilihan' => function($query) {
-                    $query->orderBy('pilihan', 'asc');
+                    $query->orderByRaw("
+                    CASE pilihan
+                    WHEN 'OK' THEN 1
+                    WHEN 'NORMAL' THEN 2
+                    WHEN 'RUNNING' THEN 3
+                    WHEN 'HIJAU (penuh)' THEN 4
+                    WHEN 'STANDBY' THEN 5
+                    WHEN 'NOT OK' THEN 6
+                    ELSE 7
+                    END ASC
+                    ");
                 }])->where('status', 1)->where('kategori', $dataKategori->kode)->where('form_jenis', env('FORM_FACILITIES'))->orderBy('kategori', 'asc')->orderBy('judul', 'asc')->get();
 
                 $form = $form->map(function ($dataForm) {
