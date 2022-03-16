@@ -43,6 +43,16 @@ $router->group(['prefix' => 'superadmin', 'middleware' => ['jwt.auth', 'role.sup
         // $router->put('/{id}', 'FormController@update');
     });
 
+    //approval cetak hak akses
+    $router->group(['prefix' => 'kodeqr'], function() use ($router) {
+        $router->get('/cetak', 'KodeQRController@cetak');
+
+        $router->get('/', 'KodeQRController@index');
+        $router->get('/{id}', 'KodeQRController@show');
+        $router->post('/add', 'KodeQRController@store');
+        $router->put('/{id}', 'KodeQRController@update');
+        $router->delete('/{id}', 'KodeQRController@delete');
+    });
 });
 
 $router->group(['prefix' => 'supervisor', 'middleware' => ['jwt.auth', 'role.supervisor']], function() use ($router) {
@@ -57,4 +67,19 @@ $router->group(['prefix' => 'eos', 'middleware' => ['jwt.auth', 'role.eos']], fu
         $router->get('/facilities', 'FormController@formFACILITIES');
         $router->get('/{id}', 'FormController@show');
     });
+});
+
+// Form Isian
+$router->get('formIsian', [
+    // 'middleware' => 'jwt.auth',
+    'uses' => 'FormController@getFormIsian'
+]);
+$router->get('formIsianAll/{id}', [
+    // 'middleware' => 'jwt.auth',
+    'uses' => 'FormController@getFormIsianAll'
+]);
+
+//Mobile
+$router->group(['prefix' => 'kodeqr'], function() use ($router) {
+    $router->get('/cek', 'KodeQRController@getKodeQR');
 });

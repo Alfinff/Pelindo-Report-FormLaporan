@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FormIsian;
 use App\Models\FormIsianKategori;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use GrahamCampbell\Flysystem\Facades\Flysystem;
@@ -403,5 +404,79 @@ class FormController extends Controller
     //         return writeLog($th->getMessage());
     //     }
     // }
+    public function getFormIsian()
+    {
+        try 
+        {
+            $decodeToken = parseJwt($this->request->header('Authorization'));
+            $uuid = $decodeToken->user->uuid;
+            $user = User::where('uuid', $uuid)->first();
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengguna tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+
+            $data = FormIsian::with(['jenis_form'])->doesntHave('kodeqr')->orderBy('judul', 'asc')->get();
+            if (empty($data)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Tidak Ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+            foreach($data as $item){
+                $item->labelForm = '['.$item->jenis_form->nama.'] '.$item->kategori.' - '.$item->judul;
+            }
+            // dd($data);
+            return response()->json([
+                'success' => true,
+                'message' => 'OK',
+                'code'    => 200,
+                'data'  => $data
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
+
+    public function getFormIsianAll($id)
+    {
+        try 
+        {
+            $decodeToken = parseJwt($this->request->header('Authorization'));
+            $uuid = $decodeToken->user->uuid;
+            $user = User::where('uuid', $uuid)->first();
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengguna tidak ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+            $dataAll = FormIsian::with(['jenis_form'])->doesntHave('kodeqr')->orWhere('qr_code',$id)->orderBy('judul', 'asc')->get();
+            if (empty($dataAll)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data Tidak Ditemukan',
+                    'code'    => 404,
+                ]);
+            }
+            foreach($dataAll as $item){
+                $item->labelForm = '['.$item->jenis_form->nama.'] '.$item->kategori.' - '.$item->judul;
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OK',
+                'code'    => 200,
+                'data'  => $dataAll
+            ]);
+        } catch (\Throwable $th) {
+            return writeLog($th->getMessage());
+        }
+    }
 
 }

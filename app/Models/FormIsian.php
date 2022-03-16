@@ -20,6 +20,7 @@ class FormIsian extends Model
         'form_jenis',
         'kategori',
         'status',
+        'qr_code',
     ];
 
     protected $connection = 'pelindo_repport';
@@ -39,6 +40,11 @@ class FormIsian extends Model
     public function pilihan()
     {
         return $this->hasMany(FormPilihan::class, 'isian_id', 'uuid');
+    }
+
+    public function kodeqr()
+    {
+        return $this->belongsTo(KodeQR::class, 'qr_code', 'uuid');
     }
 
     public function getCreatedAtAttribute($value)
