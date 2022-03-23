@@ -56,7 +56,30 @@ class KodeQRController extends Controller
             }
 
             foreach($kodeqr as $item){
-                $devices = FormIsian::with(['jenis_form'])->where('qr_code',$item->uuid)->get();
+                $devices = FormIsian::with(['jenis_form'])->where('qr_code',$item->uuid)->orderByRaw(
+                    "CASE 
+                    WHEN judul like 'PAC 1 T%' THEN 2
+                    WHEN judul like 'PAC 1 H%' THEN 3
+                    WHEN judul like 'PAC 2 T%' THEN 4
+                    WHEN judul like 'PAC 2 H%' THEN 5
+                    WHEN judul like 'PAC 3 T%' THEN 6
+                    WHEN judul like 'PAC 3 H%' THEN 7
+                    WHEN judul like 'PAC 4 T%' THEN 8
+                    WHEN judul like 'PAC 4 H%' THEN 9
+                    WHEN judul like 'PAC 5 T%' THEN 10
+                    WHEN judul like 'PAC 5 H%' THEN 11
+                    WHEN judul like 'UPS 1 V%' THEN 12
+                    WHEN judul like 'UPS 1 A%' THEN 13
+                    WHEN judul like 'UPS 1 L%' THEN 14
+                    WHEN judul like 'UPS 2 V%' THEN 15
+                    WHEN judul like 'UPS 2 A%' THEN 16
+                    WHEN judul like 'UPS 2 L%' THEN 17
+                    WHEN judul like 'UPS APC V%' THEN 18
+                    WHEN judul like 'UPS APC I%' THEN 19
+                    WHEN judul like 'UPS APC R%' THEN 20
+                    ELSE 1
+                    END ASC"
+                )->orderBy('judul', 'asc')->get();
                 if($devices->isEmpty()){
                     $devices = null;
                 }
@@ -100,7 +123,30 @@ class KodeQRController extends Controller
                 ]);
             }
             
-            $devices = FormIsian::with(['jenis_form'])->where('qr_code',$kodeqr->uuid)->pluck('uuid')->toArray();
+            $devices = FormIsian::with(['jenis_form'])->where('qr_code',$kodeqr->uuid)->orderByRaw(
+                "CASE 
+                WHEN judul like 'PAC 1 T%' THEN 2
+                WHEN judul like 'PAC 1 H%' THEN 3
+                WHEN judul like 'PAC 2 T%' THEN 4
+                WHEN judul like 'PAC 2 H%' THEN 5
+                WHEN judul like 'PAC 3 T%' THEN 6
+                WHEN judul like 'PAC 3 H%' THEN 7
+                WHEN judul like 'PAC 4 T%' THEN 8
+                WHEN judul like 'PAC 4 H%' THEN 9
+                WHEN judul like 'PAC 5 T%' THEN 10
+                WHEN judul like 'PAC 5 H%' THEN 11
+                WHEN judul like 'UPS 1 V%' THEN 12
+                WHEN judul like 'UPS 1 A%' THEN 13
+                WHEN judul like 'UPS 1 L%' THEN 14
+                WHEN judul like 'UPS 2 V%' THEN 15
+                WHEN judul like 'UPS 2 A%' THEN 16
+                WHEN judul like 'UPS 2 L%' THEN 17
+                WHEN judul like 'UPS APC V%' THEN 18
+                WHEN judul like 'UPS APC I%' THEN 19
+                WHEN judul like 'UPS APC R%' THEN 20
+                ELSE 1
+                END ASC"
+            )->orderBy('judul', 'asc')->pluck('uuid')->toArray();
             if(empty($devices)){
                 $devices = null;
             }
@@ -426,7 +472,30 @@ class KodeQRController extends Controller
             }
 
             foreach($kodeqr as $item){
-                $devices = FormIsian::with(['jenis_form'])->where('qr_code',$item->uuid)->get();
+                $devices = FormIsian::with(['jenis_form'])->where('qr_code',$item->uuid)->orderByRaw(
+                    "CASE 
+                    WHEN judul like 'PAC 1 T%' THEN 2
+                    WHEN judul like 'PAC 1 H%' THEN 3
+                    WHEN judul like 'PAC 2 T%' THEN 4
+                    WHEN judul like 'PAC 2 H%' THEN 5
+                    WHEN judul like 'PAC 3 T%' THEN 6
+                    WHEN judul like 'PAC 3 H%' THEN 7
+                    WHEN judul like 'PAC 4 T%' THEN 8
+                    WHEN judul like 'PAC 4 H%' THEN 9
+                    WHEN judul like 'PAC 5 T%' THEN 10
+                    WHEN judul like 'PAC 5 H%' THEN 11
+                    WHEN judul like 'UPS 1 V%' THEN 12
+                    WHEN judul like 'UPS 1 A%' THEN 13
+                    WHEN judul like 'UPS 1 L%' THEN 14
+                    WHEN judul like 'UPS 2 V%' THEN 15
+                    WHEN judul like 'UPS 2 A%' THEN 16
+                    WHEN judul like 'UPS 2 L%' THEN 17
+                    WHEN judul like 'UPS APC V%' THEN 18
+                    WHEN judul like 'UPS APC I%' THEN 19
+                    WHEN judul like 'UPS APC R%' THEN 20
+                    ELSE 1
+                    END ASC"
+                )->orderBy('judul', 'asc')->get();
                 if($devices->isEmpty()){
                     $devices = null;
                 }
@@ -460,7 +529,30 @@ class KodeQRController extends Controller
                 ]);
             }
             $kodeqr = $this->request->kodeqr;
-            $dataAll = FormIsian::select('uuid')->where('qr_code',$kodeqr)->get();
+            $dataAll = FormIsian::select('uuid')->where('qr_code',$kodeqr)->orderByRaw(
+                "CASE 
+                WHEN judul like 'PAC 1 T%' THEN 2
+                WHEN judul like 'PAC 1 H%' THEN 3
+                WHEN judul like 'PAC 2 T%' THEN 4
+                WHEN judul like 'PAC 2 H%' THEN 5
+                WHEN judul like 'PAC 3 T%' THEN 6
+                WHEN judul like 'PAC 3 H%' THEN 7
+                WHEN judul like 'PAC 4 T%' THEN 8
+                WHEN judul like 'PAC 4 H%' THEN 9
+                WHEN judul like 'PAC 5 T%' THEN 10
+                WHEN judul like 'PAC 5 H%' THEN 11
+                WHEN judul like 'UPS 1 V%' THEN 12
+                WHEN judul like 'UPS 1 A%' THEN 13
+                WHEN judul like 'UPS 1 L%' THEN 14
+                WHEN judul like 'UPS 2 V%' THEN 15
+                WHEN judul like 'UPS 2 A%' THEN 16
+                WHEN judul like 'UPS 2 L%' THEN 17
+                WHEN judul like 'UPS APC V%' THEN 18
+                WHEN judul like 'UPS APC I%' THEN 19
+                WHEN judul like 'UPS APC R%' THEN 20
+                ELSE 1
+                END ASC"
+            )->orderBy('judul', 'asc')->get();
             if ($dataAll->isEmpty()) {
                 return response()->json([
                     'success' => false,
