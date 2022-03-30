@@ -553,6 +553,7 @@ class KodeQRController extends Controller
                 ELSE 1
                 END ASC"
             )->orderBy('judul', 'asc')->get();
+            $dataQR = KodeQR::where('uuid',$kodeqr)->first();
             if ($dataAll->isEmpty()) {
                 return response()->json([
                     'success' => false,
@@ -565,6 +566,7 @@ class KodeQRController extends Controller
                 'success' => true,
                 'message' => 'OK',
                 'code'    => 200,
+                'qr_nama' => $dataQR->qr_nama,
                 'data'  => $dataAll
             ]);
         } catch (\Throwable $th) {
